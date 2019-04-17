@@ -6,6 +6,7 @@
 #include <string.h>
 #include <time.h>
 #include <random>
+#include<algorithm>
 
 using namespace std;
 
@@ -33,7 +34,7 @@ class Heap{
       //cout<<"Index : "<<" : "<<(n-1)/2<<endl;
       unsigned int Parent_idx = (double)(n-1)/2;
       //cout<<"Parent_idx : "<<Parent_idx<<endl;
-      if(weight_MP[n]>=weight_MP[Parent_idx])
+      if(weight_MP[n]<=weight_MP[Parent_idx])
       {
         return true;
 
@@ -60,9 +61,9 @@ class Heap{
         return true;
       }
 
-      if(weight11[((2*i)+1)]<=weight11[((2*i)+2)])
+      if(weight11[((2*i)+1)]>=weight11[((2*i)+2)])
       {
-        if(weight11[i]<=weight11[((2*i)+2)])
+        if(weight11[i]>=weight11[((2*i)+2)])
         {
           return true;
         }
@@ -78,7 +79,7 @@ class Heap{
       }
       else
       {
-        if(weight11[i]<=weight11[((2*i)+2)])
+        if(weight11[i]>=weight11[((2*i)+2)])
         {
           return true;
         }
@@ -132,9 +133,14 @@ class Heap{
       }
     }
 
-    T Min()
+    T MaxEdge()
     {
       return H[0];
+    }
+
+    T MaxWeight()
+    {
+      return EdgeWeight[0];
     }
 
 
@@ -144,6 +150,15 @@ class Heap{
       {
         cout<<"Nothing to delete"<<endl;
         return false;
+      }
+
+      else if(H.size()==1)
+      {
+        cout<<"Deleting the last element in the tree.."<<endl;
+        H.erase(H.end()-1);
+        EdgeWeight.erase(EdgeWeight.end()-1);
+        return true;
+
       }
 
       else
@@ -157,17 +172,23 @@ class Heap{
         EdgeWeight.erase(EdgeWeight.end()-1);
         unsigned int P_idx = (double)(index-1)/2;
 
-        if(EdgeWeight[index]<=EdgeWeight[P_idx])
+        if(EdgeWeight[index]>=EdgeWeight[P_idx])
         {
           return MakeHeap_Parent(EdgeWeight,H,index);
         }
-        else if((EdgeWeight[index]>=EdgeWeight[(2*index)+1])||(EdgeWeight[index]>=EdgeWeight[(2*index)+2]))
+        else if((EdgeWeight[index]<=EdgeWeight[(2*index)+1])||(EdgeWeight[index]<=EdgeWeight[(2*index)+2]))
         {
           return MakeHeap_Child(EdgeWeight,H,index);
         }
       }
 
     }
+
+    int SizeOfHeapIsZero()
+    {
+      return H.size();
+    }
+
 
 
 };
@@ -358,8 +379,39 @@ class LinkedList{
     {
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
-      cout<<tempNode->NodeStatus<<"\n";
-      cout<<tempNode->Bandwidth<<"\n";
+      cout<<"Node status : "<<tempNode->NodeStatus<<"\n";
+      cout<<"Node Bandwidth : "<<tempNode->Bandwidth<<"\n";
+    }
+
+    bool IsNodeUnseen()
+    {
+      SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
+      tempNode=this->root;
+
+      if(tempNode->NodeStatus == STATUS_GRAPH_UNSEEN)
+      {
+        return true;
+      }
+
+      else
+      {
+        return false;
+      }
+
+    }
+
+    T GetBandWidth()
+    {
+      SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
+      tempNode=this->root;
+      return tempNode->Bandwidth;
+    }
+
+    T GetWeight()
+    {
+      SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
+      tempNode=this->root;
+      return tempNode->weight;
     }
 
 };
