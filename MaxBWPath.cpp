@@ -20,13 +20,18 @@ int main()
   LinkedList<int> *Graph_2 = new LinkedList<int>[NUMBER_OF_VERTICES];
 
   LinkedList<int> *Graph_test = new LinkedList<int>[5];
-  Graph_test[0].insert(1,2);
-  Graph_test[0].insert(2,7);
+  Graph_test[0].insert(1,20);
+  Graph_test[1].insert(0,20);
+
+  Graph_test[0].insert(2,70);
+  Graph_test[2].insert(0,70);
   //Graph_test[0].insert(4,5);
   Graph_test[1].insert(3,3);
-  Graph_test[2].insert(3,8);
-  Graph_test[3].insert(2,8);
   Graph_test[3].insert(1,3);
+
+  Graph_test[2].insert(3,100);
+  Graph_test[3].insert(2,100);
+
   //Graph_test[0].insert(4,2);
 
   /*
@@ -89,6 +94,11 @@ int main()
       int AdjNode = (int)AdjacentNodes[count];
       cout<<"Status of the node "<<AdjNode<<" : "<<endl;
       Graph_test[AdjNode].ViewNodeStatus();
+
+      int AdjNodeBW1 = Graph_test[AdjNode].GetBandWidth();
+      int BW_node1 = Graph_test[Node].GetBandWidth();
+      int AdjNode_Weight1 = Graph_test[AdjNode].GetWeight();
+
       if(Graph_test[AdjNode].IsNodeUnseen() == true)
       {
         Graph_test[AdjNode].MakeNodesFringe();
@@ -101,8 +111,28 @@ int main()
         Heap_test->Insert(AdjNode,AdjNodeBW);
       }
 
+      else if((Graph_test[AdjNode].IsNodeFringe() == true)&&(AdjNodeBW1<(std::min({BW_node1,AdjNode_Weight1}))))
+      {
+        Heap_test->Delete(Heap_test->position[AdjNode]);
+        Graph_test[AdjNode].SetDad(Node);
+        //ToDo
+        Graph_test[AdjNode].SetNodeBandwidth(std::min({BW_node1,AdjNode_Weight1}));
+        int AdjNodeBW2 = Graph_test[AdjNode].GetBandWidth();
+        Heap_test->Insert(AdjNode,AdjNodeBW2);
+
+      }
+
     }
   }
+
+  int Node_D = 3;
+  cout<<Node_D<<"<-";
+  while(Graph_test[Node_D].DisplayDadNodes()!=0)
+  {
+    cout<<Graph_test[Node_D].DisplayDadNodes()<<"<-";
+    Node_D=Graph_test[Node_D].DisplayDadNodes();
+  }
+  cout<<"0"<<endl;
 
 
 

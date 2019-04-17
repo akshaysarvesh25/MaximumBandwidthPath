@@ -400,6 +400,24 @@ class LinkedList{
 
     }
 
+
+    bool IsNodeFringe()
+    {
+      SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
+      tempNode=this->root;
+
+      if(tempNode->NodeStatus == STATUS_GRAPH_FRINGE)
+      {
+        return true;
+      }
+
+      else
+      {
+        return false;
+      }
+
+    }
+
     T GetBandWidth()
     {
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
@@ -412,6 +430,17 @@ class LinkedList{
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
       return tempNode->weight;
+    }
+
+    T DisplayDadNodes()
+    {
+      SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
+      tempNode=this->root;
+
+      //cout<<tempNode->dad<<" -> ";
+      //tempNode=tempNode->NextNode;
+
+      return tempNode->dad;
     }
 
 };
