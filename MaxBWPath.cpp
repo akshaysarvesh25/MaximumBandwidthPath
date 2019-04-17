@@ -13,13 +13,15 @@ int main()
   Heap<int> *Heap1 = new Heap<int>();
   Heap<int> *Heap2 = new Heap<int>();
 
+  Heap<int> *Heap_test = new Heap<int>();
+
   /* Creating graphs of 5000 nodes as an adjacency list */
   LinkedList<int> *Graph_1 = new LinkedList<int>[NUMBER_OF_VERTICES];
   LinkedList<int> *Graph_2 = new LinkedList<int>[NUMBER_OF_VERTICES];
 
   LinkedList<int> *Graph_test = new LinkedList<int>[5];
   Graph_test[0].insert(1,2);
-  Graph_test[0].insert(2,2);
+  Graph_test[0].insert(2,4);
   Graph_test[1].insert(3,3);
   Graph_test[2].insert(3,1);
   //Graph_test[0].insert(4,2);
@@ -47,14 +49,18 @@ int main()
   Graph_test[0].SetNodeBandwidth(99999);
 
   std::vector<int> AdjacentNodes = Graph_test[0].GetAdjacentNodes();
+  std::vector<int> AdjacentNodeWeights = Graph_test[0].GetAdjacentNodesWeights();
 
   for(unsigned int count = 0;count<AdjacentNodes.size();count++)
   {
     int AdjNode = (int)AdjacentNodes[count];
+    int AdjNodeWeight = (int)AdjacentNodeWeights[count];
     Graph_test[AdjNode].MakeNodesFringe();
     Graph_test[AdjNode].SetDad(0);
-    //Graph_test[AdjNode].SetNodeBandwidth();
+    Graph_test[AdjNode].SetNodeBandwidth(AdjNodeWeight);
+    
   }
+
 
 
 

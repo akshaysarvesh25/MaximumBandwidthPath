@@ -331,6 +331,21 @@ class LinkedList{
       return temp;
     }
 
+    std::vector<int> GetAdjacentNodesWeights()
+    {
+      std::vector<int> temp;
+      SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
+      tempNode=this->root;
+
+      while(tempNode!=NULL)
+      {
+        temp.push_back(tempNode->weight);
+        tempNode=tempNode->NextNode;
+      }
+
+      return temp;
+    }
+
     void SetDad(T dadval)
     {
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
@@ -344,6 +359,7 @@ class LinkedList{
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
       cout<<tempNode->NodeStatus<<"\n";
+      cout<<tempNode->Bandwidth<<"\n";
     }
 
 };
