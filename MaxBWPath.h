@@ -356,6 +356,26 @@ class LinkedList{
       return temp;
     }
 
+    std::vector<int> GetAdjacentNodesWithout(int NodeName)
+    {
+      std::vector<int> temp;
+      SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
+      tempNode=this->root;
+      cout<<"Adjacent nodes : "<<endl;
+      while(tempNode!=NULL)
+      {
+        if(tempNode->data!=NodeName)
+        {
+          temp.push_back(tempNode->data);
+          cout<<tempNode->data<<endl;
+        }
+
+        tempNode=tempNode->NextNode;
+      }
+
+      return temp;
+    }
+
     std::vector<int> GetAdjacentNodesWeights()
     {
       std::vector<int> temp;
@@ -371,20 +391,26 @@ class LinkedList{
       return temp;
     }
 
-    void SetDad(T dadval)
+    void SetDad(int dadval)
     {
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
-      unsigned int i=0;
       tempNode->dad = dadval;
+    }
+
+    void GetDad()
+    {
+      SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
+      tempNode=this->root;
+      cout<<"dad of : "<<tempNode->data<<" is : "<<tempNode->dad<<endl;
     }
 
     void ViewNodeStatus()
     {
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
-      cout<<"Node status : "<<tempNode->NodeStatus<<"\n";
-      cout<<"Node Bandwidth : "<<tempNode->Bandwidth<<"\n";
+      cout<<"Node status of : "<<tempNode->data<<" is : "<<tempNode->NodeStatus<<"\n";
+      cout<<"Node Bandwidth of : "<<tempNode->data<<" is : "<<tempNode->Bandwidth<<"\n";
     }
 
     bool IsNodeUnseen()

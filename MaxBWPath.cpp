@@ -34,6 +34,12 @@ int main()
 
   //Graph_test[0].insert(4,2);
 
+  for(unsigned int i = 0;i<=3;i++)
+  {
+  cout<<i<<"->";
+  Graph_test[i].display();
+  }
+
   /*
   Graph_test[0].ViewNodeStatus();
   Graph_test[1].ViewNodeStatus();
@@ -56,6 +62,8 @@ int main()
 
   Graph_test[0].SetNodeBandwidth(99999);
 
+  int Node_prev = 0;
+
   std::vector<int> AdjacentNodes = Graph_test[0].GetAdjacentNodes();
   std::vector<int> AdjacentNodeWeights = Graph_test[0].GetAdjacentNodesWeights();
   /*
@@ -65,19 +73,27 @@ int main()
     cout<<Heap_test->SizeOfHeapIsZero()<<endl;
   }*/
 
-  for(unsigned int count = 0;count<AdjacentNodes.size();count++)
+  Graph_test[0].ViewNodeStatus();
+  Graph_test[1].ViewNodeStatus();
+  Graph_test[2].ViewNodeStatus();
+
+  for(unsigned int count = 0;count<=AdjacentNodes.size();count++)
   {
+
     int AdjNode = (int)AdjacentNodes[count];
+    cout<<"Nodename : "<<AdjNode<<endl;
+    cout<<"Count : "<<count<<endl;
     int AdjNodeWeight = (int)AdjacentNodeWeights[count];
     Graph_test[AdjNode].MakeNodesFringe();
     Graph_test[AdjNode].SetDad(0);
+    Graph_test[AdjNode].GetDad();
     Graph_test[AdjNode].SetNodeBandwidth(AdjNodeWeight);
     bool b = Heap_test->Insert(AdjNode,AdjNodeWeight);
-
+    cout<<"____"<<endl;
   }
   /* Printing the heap data structure */
   Heap_test->print();
-  cout<<"Starting the algorithm.."<<endl;
+  cout<<"Starting the algorithm..\n"<<"_____"<<endl;
   while(Heap_test->SizeOfHeapIsZero()!=0)
   {
     int Node = Heap_test->MaxEdge();
@@ -88,7 +104,9 @@ int main()
     Heap_test->print();
     Graph_test[Node].MakeNodesIntree();
     //cout<<Heap_test->SizeOfHeapIsZero()<<endl;
-    std::vector<int> AdjacentNodes = Graph_test[Node].GetAdjacentNodes();
+    //std::vector<int> AdjacentNodes = Graph_test[Node].GetAdjacentNodesWithout(Node_prev);
+    std::vector<int> AdjacentNodes = Graph_test[Node].GetAdjacentNodes();//Without(Node_prev);
+    Node_prev = Node;
 
     for(unsigned int count = 0;count<AdjacentNodes.size();count++)
     {
@@ -127,6 +145,7 @@ int main()
       }
 
     }
+    cout<<"____"<<endl;
   }
 
   int Node_D = 3;
