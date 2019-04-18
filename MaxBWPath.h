@@ -127,10 +127,13 @@ class Heap{
 
     void print()
     {
+
+      std::cout << "\033[1;33mBegin Printing contents of the heap \033[0m"<<std::endl;
       for(unsigned int i = 0;i<H.size();i++)
       {
         std::cout<<H[i]<<" "<<EdgeWeight[i]<<std::endl;
       }
+      std::cout << "\033[1;33mEnd of heap\033[0m"<<std::endl;
     }
 
     T MaxEdge()
@@ -342,10 +345,11 @@ class LinkedList{
       std::vector<int> temp;
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
-
+      cout<<"Adjacent nodes : "<<endl;
       while(tempNode!=NULL)
       {
         temp.push_back(tempNode->data);
+        cout<<tempNode->data<<endl;
         tempNode=tempNode->NextNode;
       }
 

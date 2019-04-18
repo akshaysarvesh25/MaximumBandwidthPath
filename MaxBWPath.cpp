@@ -29,8 +29,8 @@ int main()
   Graph_test[1].insert(3,3);
   Graph_test[3].insert(1,3);
 
-  Graph_test[2].insert(3,100);
-  Graph_test[3].insert(2,100);
+  Graph_test[2].insert(3,1);
+  Graph_test[3].insert(2,1);
 
   //Graph_test[0].insert(4,2);
 
@@ -76,7 +76,7 @@ int main()
 
   }
   /* Printing the heap data structure */
-  //Heap_test->print();
+  Heap_test->print();
   cout<<"Starting the algorithm.."<<endl;
   while(Heap_test->SizeOfHeapIsZero()!=0)
   {
@@ -85,6 +85,7 @@ int main()
     cout<<"Node and weight : "<<Node<<" "<<weight<<endl;
     //cout<<Heap_test->SizeOfHeapIsZero()<<endl;
     Heap_test->Delete(Heap_test->position[Node]);
+    Heap_test->print();
     Graph_test[Node].MakeNodesIntree();
     //cout<<Heap_test->SizeOfHeapIsZero()<<endl;
     std::vector<int> AdjacentNodes = Graph_test[Node].GetAdjacentNodes();
@@ -109,16 +110,19 @@ int main()
         Graph_test[AdjNode].SetNodeBandwidth(std::min({BW_node,AdjNode_Weight}));
         int AdjNodeBW = Graph_test[AdjNode].GetBandWidth();
         Heap_test->Insert(AdjNode,AdjNodeBW);
+        Heap_test->print();
       }
 
       else if((Graph_test[AdjNode].IsNodeFringe() == true)&&(AdjNodeBW1<(std::min({BW_node1,AdjNode_Weight1}))))
       {
         Heap_test->Delete(Heap_test->position[AdjNode]);
+        Heap_test->print();
         Graph_test[AdjNode].SetDad(Node);
         //ToDo
         Graph_test[AdjNode].SetNodeBandwidth(std::min({BW_node1,AdjNode_Weight1}));
         int AdjNodeBW2 = Graph_test[AdjNode].GetBandWidth();
         Heap_test->Insert(AdjNode,AdjNodeBW2);
+        Heap_test->print();
 
       }
 
