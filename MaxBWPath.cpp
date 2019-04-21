@@ -45,6 +45,21 @@ int main()
   Graph_test[i].display();
   }
 
+  srand(42);
+  /* Construct a cycle of connected nodes */
+  for(unsigned int i = 0;i<NUMBER_OF_VERTICES;i++)
+  {
+    unsigned int weight_insert = rand()%100;
+    if(i==(NUMBER_OF_VERTICES-1))
+    {
+      Graph_1[i].insert(i,99999);
+      Graph_1[i].insert(0,weight_insert);
+      continue;
+    }
+    Graph_1[i].insert(i,99999);
+    Graph_1[i].insert(i+1,weight_insert);
+  }
+
   for(unsigned int i = 0;i<NUMBER_OF_VERTICES;i++)
   {
     for(unsigned int NV = 0;NV<(NUMBER_OF_VERTICES);NV++)
