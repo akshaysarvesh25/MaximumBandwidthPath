@@ -10,6 +10,8 @@
 
 using namespace std;
 
+#define OUTPUT_LOG 0
+
 
 template <class T>
 class Heap{
@@ -127,13 +129,14 @@ class Heap{
 
     void print()
     {
-
+      #if OUTPUT_LOG
       std::cout << "\033[1;33mContents of the heap : \033[0m"<<std::endl;
       for(unsigned int i = 0;i<H.size();i++)
       {
         std::cout<<H[i]<<" "<<EdgeWeight[i]<<std::endl;
       }
       std::cout << "\033[1;33mEnd of heap\033[0m"<<std::endl;
+      #endif
     }
 
     T MaxEdge()
@@ -345,11 +348,15 @@ class LinkedList{
       std::vector<int> temp;
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
+      #if OUTPUT_LOG
       cout<<"Adjacent nodes : "<<endl;
+      #endif
       while(tempNode!=NULL)
       {
         temp.push_back(tempNode->data);
+        #if OUTPUT_LOG
         cout<<tempNode->data<<endl;
+        #endif
         tempNode=tempNode->NextNode;
       }
 
@@ -361,7 +368,9 @@ class LinkedList{
       std::vector<int> temp;
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
+      #if OUTPUT_LOG
       cout<<"Adjacent nodes : "<<endl;
+      #endif
       while(tempNode!=NULL)
       {
         if(tempNode->data!=NodeName)
@@ -402,15 +411,19 @@ class LinkedList{
     {
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
+      #if OUTPUT_LOG
       cout<<"dad of : "<<tempNode->data<<" is : "<<tempNode->dad<<endl;
+      #endif
     }
 
     void ViewNodeStatus()
     {
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
+      #if OUTPUT_LOG
       cout<<"Node status of : "<<tempNode->data<<" is : "<<tempNode->NodeStatus<<"\n";
       cout<<"Node Bandwidth of : "<<tempNode->data<<" is : "<<tempNode->Bandwidth<<"\n";
+      #endif
     }
 
     bool IsNodeUnseen()
