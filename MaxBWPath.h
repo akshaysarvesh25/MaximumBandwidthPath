@@ -128,7 +128,7 @@ class Heap{
     void print()
     {
 
-      std::cout << "\033[1;33mBegin Printing contents of the heap \033[0m"<<std::endl;
+      std::cout << "\033[1;33mContents of the heap : \033[0m"<<std::endl;
       for(unsigned int i = 0;i<H.size();i++)
       {
         std::cout<<H[i]<<" "<<EdgeWeight[i]<<std::endl;
@@ -271,7 +271,7 @@ class LinkedList{
       if(root)
       {
         #if INSERT_DEBUG_OUTPUT
-        cout<<"Adding new elements"<<endl;
+        cout<<"Adding new elements "<<endl;
         #endif
         tail->NextNode=tempNode;
         tail=tempNode;
@@ -453,6 +453,23 @@ class LinkedList{
       SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
       tempNode=this->root;
       return tempNode->Bandwidth;
+    }
+
+    T GetWeightOfAdjNode(T val)
+    {
+      SingleLinkedListNode<T> *tempNode=new SingleLinkedListNode<T>;
+      tempNode=this->root;
+
+      while((tempNode!=NULL))
+      {
+        if(tempNode->data == val)
+        {
+          return tempNode->weight;
+        }
+        tempNode=tempNode->NextNode;
+      }
+
+      return 99999;
     }
 
     T GetWeight()
