@@ -64,7 +64,7 @@ int main()
   {
     for(unsigned int NV = 0;NV<(NUMBER_OF_VERTICES);NV++)
     {
-      if((rand()%100)<=9)
+      if((rand()%5000)<=6)
       {
         unsigned int weight_insert = rand()%100;
         Graph_1[i].insert(NV,weight_insert);
@@ -226,7 +226,7 @@ int main()
     #endif
   }
 
-  int Node_D = 3;
+  int Node_D = 999;
   cout<<Node_D<<"<-";
   while(Graph_1[Node_D].DisplayDadNodes()!=0)
   {
